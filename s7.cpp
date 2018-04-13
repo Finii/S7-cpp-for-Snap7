@@ -42,6 +42,7 @@ string S7_GetTxtPLCType (short int plcType)
          return "SINAMICS";
         break;
   }
+  return "unknown";
 }
 
 //****************************************************************************
@@ -207,10 +208,7 @@ void S7_SetByteAt(byte Buffer[], int Pos, uint8_t Value )
 int8_t S7_GetSIntAt(byte Buffer[], int Pos)
 {
   int Value = Buffer[Pos];
-  if (Value < 128)
-   return Value;
-  else
-   return (int8_t) (Value - 256);
+  return (int8_t)Value;
 }
 
 //****************************************************************************
@@ -218,8 +216,6 @@ int8_t S7_GetSIntAt(byte Buffer[], int Pos)
 // Set SInt (-128..127) at buffer of bytes
 void S7_SetSIntAt(byte Buffer[], int Pos, int8_t Value)
 {
-  if (Value < -128) Value = -128;
-  if (Value > 127) Value = 127;
   Buffer[Pos] = (byte)Value;
 }
 
