@@ -12,6 +12,7 @@
 
 #include "s7.h"
 #include "string.h" // for memcpy
+#include <cstdlib> // strtol
 
 
 using namespace std;
