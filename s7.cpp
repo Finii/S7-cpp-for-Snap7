@@ -91,7 +91,7 @@ string S7_GetTxtPLCType (short int plcType)
  // Return: the TSAP number in a word and decimal format
  uint16_t S7_GetWordFromTSAP ( string TSAP)
  {
-    short int pos = TSAP.find ('.'); // find the delimiter into the source string
+    std::size_t pos = TSAP.find ('.'); // find the delimiter into the source string
 
     if (pos == string::npos) {// no delimiter was found, return 0
       return 0;
