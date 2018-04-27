@@ -15,14 +15,12 @@
 #include <cstdlib> // strtol
 
 
-using namespace std;
-
 static byte Mask[] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
 
 //****************************************************************************
 
 // Get Text description of PLC Type
-string S7_GetTxtPLCType (short int plcType)
+std::string S7_GetTxtPLCType (short int plcType)
 {
   switch (plcType)
   {
@@ -90,16 +88,16 @@ string S7_GetTxtPLCType (short int plcType)
  // Get the word from Transport Service Access Point (TSAP) in hex format, e.g: 10.02 => 0x1002, used by Cli_SetConnectionParams
  // Enter TSAP in format ##.## in hex
  // Return: the TSAP number in a word and decimal format
- uint16_t S7_GetWordFromTSAP ( string TSAP)
+ uint16_t S7_GetWordFromTSAP ( std::string TSAP)
  {
     std::size_t pos = TSAP.find ('.'); // find the delimiter into the source string
 
-    if (pos == string::npos) {// no delimiter was found, return 0
+    if (pos == std::string::npos) {// no delimiter was found, return 0
       return 0;
     }
     else { // was found '.'
-      string first  = TSAP.substr (0,pos);    // get the first argument
-      string second = TSAP.substr (pos+1,2) ; // get the second argument
+      std::string first  = TSAP.substr (0,pos);    // get the first argument
+      std::string second = TSAP.substr (pos+1,2) ; // get the second argument
 
       // convert both TSAP arguments from hex (16) in string format to a number in decimal
       char* p; // used in the strtol function
@@ -116,7 +114,7 @@ string S7_GetTxtPLCType (short int plcType)
 
  //****************************************************************************
  // Get Text message of Area Source
-  string S7_GetTxtAreaSource (int areaSource)
+std::string S7_GetTxtAreaSource (int areaSource)
   {
       switch (areaSource)
       {
@@ -468,9 +466,9 @@ float S7_GetRealAt(byte Buffer[], int Pos)
 //  - 2nd byte: Current Length
 //  - 3rd ... n byte: string characters
 
- string S7_GetStringAt(byte Buffer[], int Pos)
+std::string S7_GetStringAt(byte Buffer[], int Pos)
  {
-   string res;
+   std::string res;
 
    int size = (int) Buffer[Pos + 1];
 
@@ -486,7 +484,7 @@ float S7_GetRealAt(byte Buffer[], int Pos)
  //  - 2nd byte: Current Length
  //  - 3rd ... n byte: string characters
 
-  void S7_SetStringAt(byte Buffer[], int Pos, int MaxLen, string Value)
+  void S7_SetStringAt(byte Buffer[], int Pos, int MaxLen, std::string Value)
   {
     int size = Value.size();
 
@@ -498,9 +496,9 @@ float S7_GetRealAt(byte Buffer[], int Pos)
 
  //****************************************************************************
  //Get Array of char (S7 ARRAY OF CHARS)
-  string S7_GetCharsAt(byte Buffer[], int Pos, int Size)
+std::string S7_GetCharsAt(byte Buffer[], int Pos, int Size)
   {
-      string res;
+      std::string res;
 
       res.insert (0, (char*) &Buffer[Pos],Size);
 
@@ -511,12 +509,12 @@ float S7_GetRealAt(byte Buffer[], int Pos)
 
  //****************************************************************************
  //Set Array of char (S7 ARRAY OF CHARS)
-  void S7_SetCharsAt(byte Buffer[], int BufferLen, int Pos, string Value)
+  void S7_SetCharsAt(byte Buffer[], int BufferLen, int Pos, std::string Value)
   {
    int MaxLen = BufferLen - Pos;
    int Size = Value.size();
 
-    cout << " Max Len: " << MaxLen << " Size: " << Size << endl;
+   // std::cout << " Max Len: " << MaxLen << " Size: " << Size << std::endl;
 
    // Truncs the string if there's no room enough
    if (Size > MaxLen) Size = MaxLen;

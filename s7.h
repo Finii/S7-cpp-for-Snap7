@@ -13,8 +13,6 @@
 
 #include "snap7.h"
 
-using namespace std;
-
 // Define different PLC Types
 #define S7_PLC_300_400    0 // for PLC S7 300/400
 #define S7_PLC_1200_1500  1 // for PLC S7 1200/1500
@@ -46,13 +44,13 @@ using namespace std;
 #define S7_TYPE_STRING  15
 #define S7_TYPE_ARRAYCHAR 16
 
-string S7_GetTxtPLCType (short int plcType); // Get Text description of PLC Type
+std::string S7_GetTxtPLCType (short int plcType); // Get Text description of PLC Type
 
     int S7_GetDataTypeSize (int type); // Get data type size
 
-uint16_t S7_GetWordFromTSAP ( string TSAP); // Get the word from Transport Service Access Point (TSAP) in hex format, e.g: 10.02 => 0x1002, used by Cli_SetConnectionParams
+uint16_t S7_GetWordFromTSAP ( std::string TSAP); // Get the word from Transport Service Access Point (TSAP) in hex format, e.g: 10.02 => 0x1002, used by Cli_SetConnectionParams
 
- string S7_GetTxtAreaSource (int areaSource); // Get Text message of Area Source
+std::string S7_GetTxtAreaSource (int areaSource); // Get Text message of Area Source
 
     int S7_BDCToByte (byte B); // Get BDC and convert to byte
 
@@ -114,12 +112,12 @@ int64_t S7_GetLIntAt(byte Buffer[], int Pos); // Get 64 bit signed value (S7 LIn
 
    void S7_SetLRealAt(byte Buffer[], int Pos, double Value); // Set 64 bit floating point number (S7 LReal) (Range of double)
 
-   string S7_GetStringAt(byte Buffer[], int Pos); // Get String (S7 String)
+   std::string S7_GetStringAt(byte Buffer[], int Pos); // Get String (S7 String)
 
-   void S7_SetStringAt(byte Buffer[], int Pos, int MaxLen, string Value); // Set String (S7 String)
+   void S7_SetStringAt(byte Buffer[], int Pos, int MaxLen, std::string Value); // Set String (S7 String)
 
-   string S7_GetCharsAt(byte Buffer[], int Pos, int Size); //Get Array of char (S7 ARRAY OF CHARS)
+   std::string S7_GetCharsAt(byte Buffer[], int Pos, int Size); //Get Array of char (S7 ARRAY OF CHARS)
 
-   void S7_SetCharsAt(byte Buffer[], int BufferLen, int Pos, string Value); //Set Array of char (S7 ARRAY OF CHARS)
+   void S7_SetCharsAt(byte Buffer[], int BufferLen, int Pos, std::string Value); //Set Array of char (S7 ARRAY OF CHARS)
 
 #endif // S7_H
